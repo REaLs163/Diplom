@@ -1,116 +1,119 @@
-from selenium import webdriver
-from selenium.webdriver.common.keys import Keys
-from selenium.webdriver.common.by import By
-from selenium.webdriver import ChromeOptions
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
-from bs4 import BeautifulSoup
-import time as t
+import requests
+import json
+import re
 
-def main():
-    start_time = t.time()
-    options = ChromeOptions()
-    options.add_argument("--headless=new")  
-    options.add_argument("--window-size=1920,1080")
-    options.add_argument("--disable-gpu")
-    options.add_argument("--log-level=3")
-    options.add_argument("--blink-settings=imagesEnabled=false")
-    driver = webdriver.Chrome(options=options)
-    wait=WebDriverWait(driver, 5)
-    
-    try:
-        driver.get("https://www.citilink.ru")
-        
-        wait.until(EC.presence_of_element_located((By.XPATH, "//input[@placeholder='Поиск по товарам']")))
-        
-        tovar = input('Введите текст: ').replace('"', '').replace('\\', '')
-        reviews_limit_input = input("Сколько отзывов хотите получить? Введите число или 'all': ").strip()
-        
-        # Определяем режим: all или ограниченное число
-        is_all = reviews_limit_input.lower() == "all"
-        reviews_limit = None if is_all else int(reviews_limit_input) if reviews_limit_input.isdigit() else None
 
-        if not is_all and reviews_limit is None:
-            print("Некорректный ввод. Завершение.")
-            return
-        
-        elem = driver.find_element(By.XPATH, "//input[@placeholder = 'Поиск по товарам']")
-        elem.send_keys(tovar)
-        elem.send_keys(Keys.ENTER)
-        
-        wait.until(EC.presence_of_element_located((By.XPATH, "//a[contains(@href, '/product/')]")))
-        elem = driver.find_element(By.XPATH, "//a[contains(@href, '/product/')]")
-        driver.execute_script("arguments[0].click();", elem)
-        
-        wait.until(EC.presence_of_element_located((By.XPATH, "//a[contains(@href, '/otzyvy/')]")))
-        elem = driver.find_element(By.XPATH, "//a[contains(@href, '/otzyvy/')]")
-        driver.execute_script("arguments[0].click();", elem)
-        
-        # Проверка на отсутствие отзывов
-        try:
-            wait.until(EC.presence_of_element_located((By.XPATH, "//*[text()='Для этого товара пока нет отзывов']")))
-            print("Отзывов на этот товар пока нет.")
-            return
-        except:
-            pass
+def extract_product_id(url):
+    match = re.search(r'/product/.+-(\d+)/', url)
+    if match:
+        return match.group(1)
+    else:
+        raise ValueError("Не удалось извлечь product_id из ссылки.")
 
-        # Ожидание появления кнопки "Показать ещё"
-        try:
-            wait.until(EC.presence_of_element_located((By.XPATH, "//button[span[text()='Показать ещё']]")))
-        except:
-            pass
+def get_citilink_reviews(product_id, page=1, per_page=5):
+    url = 'https://www.citilink.ru/graphql/'
 
-        # Цикл кликов
-        clicks = 0
-        max_clicks = None if is_all else max((reviews_limit - 5) // 5, 0)
-            
-        while True:
-            try:
-                if max_clicks is not None and clicks >= max_clicks:
-                    break
-                elem = wait.until(EC.presence_of_element_located((By.XPATH, "//button[span[text()='Показать ещё']]")))
-                elem = driver.find_element(By.XPATH, "//button[span[text()='Показать ещё']]")
-                driver.execute_script("arguments[0].click();", elem)  
-                clicks += 1
-                t.sleep(1) 
-            except Exception:
-                print("Элемент 'Показать ещё' не найден, все отзывы загружены.")
-                break
-            
-        # Подсчёт уникальных отзывов
-        soup = BeautifulSoup(driver.page_source, "html.parser")
-        review_blocks_raw = soup.find_all("div", class_="app-catalog-1mg14ol-ContentWrapper--StyledContentWrapper")
+    headers = {
+        'accept': '*/*',
+        'content-type': 'application/json',
+        'origin': 'https://www.citilink.ru',
+        'referer': f'https://www.citilink.ru/product/{product_id}/otzyvy/?page={page}',
+        'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
+    }
 
-        unique_reviews = []
-        seen_texts = set()
+    query = """
+    query($filter1:Catalog_ProductFilterInput!$input2:UGC_OpinionsInput!){
+        product_b6304_0d594:product(filter:$filter1){
+            opinions_03450_3ec12:opinions(input:$input2){
+                payload{
+                    items{
+                        id 
+                        creationDate 
+                        pros 
+                        cons 
+                        text 
+                        rating 
+                        authorNickname 
+                    }
+                }
+                pageInfo{
+                    page 
+                    perPage 
+                    totalItems 
+                    totalPages 
+                    hasNextPage 
+                    hasPreviousPage
+                }
+            }
+        }
+    }
+    """
 
-        for block in review_blocks_raw:
-            text = block.get_text(strip=True)
-            if text not in seen_texts:
-                seen_texts.add(text)
-                unique_reviews.append(block)
+    variables = {
+        "filter1": {"id": product_id},
+        "input2": {
+            "pagination": {
+                "page": page,
+                "perPage": per_page
+            },
+            "withGroup": True
+        }
+    }
 
-        actual_reviews = len(unique_reviews)
-        duplicates_count = len(review_blocks_raw) - actual_reviews
+    payload = {
+        "query": query,
+        "variables": variables
+    }
 
-        if reviews_limit is not None and actual_reviews < reviews_limit:
-            print(f"Внимание: у товара всего {actual_reviews} уникальных отзывов, "
-                  f"вместо запрошенных {reviews_limit}. Сохраняю всё, что есть.")
+    response = requests.post(url, headers=headers, json=payload)
+
+    if response.status_code == 200:
+        return response.json()
+    else:
+        print(f"Ошибка запроса: {response.status_code}")
+        return None
+
+def collect_reviews(product_url, total_reviews_needed=50, per_page=5):
+    product_id = extract_product_id(product_url)
+    collected_reviews = []
+    page = 1
+
+    while len(collected_reviews) < total_reviews_needed:
+        data = get_citilink_reviews(product_id, page, per_page)
+
+        if data:
+            items = data['data']['product_b6304_0d594']['opinions_03450_3ec12']['payload']['items']
+            if not items:
+                break  # больше отзывов нет
+
+            collected_reviews.extend(items)
+
+            if not data['data']['product_b6304_0d594']['opinions_03450_3ec12']['pageInfo']['hasNextPage']:
+                break  # нет следующей страницы
+            page += 1
         else:
-            print(f"Загружено {actual_reviews} уникальных отзывов.")
-            
-        if duplicates_count > 0:
-            print(f"Пропущено дубликатов: {duplicates_count}")
+            break
 
-        # Сохраняем страницу
-        with open ("page.html", "w", encoding="utf-8") as file:
-            file.write(driver.page_source)
-        print('HTML-страница сохранена в файле page.html')
-        
-    finally:
-        driver.quit()
-        end_time = t.time()  #Окончание работы
-        print(f"Парсинг отзывов выполнился за {round(end_time - start_time, 2)} секунд.")    
-    
-if __name__ == "__main__":
-    main()
+    # обрезаем, если собрали больше отзывов чем нужно
+    collected_reviews = collected_reviews[:total_reviews_needed]
+
+    # Сохраняем в файл
+    product_id_clean = product_id
+    with open(f'citilink_reviews_{product_id_clean}.json', 'w', encoding='utf-8') as f:
+        json.dump(collected_reviews, f, ensure_ascii=False, indent=4)
+
+    # Печатаем
+    for review in collected_reviews:
+        print(f"Автор: {review.get('authorNickname', 'Аноним')}")
+        print(f"Рейтинг: {review['rating']}/5")
+        print(f"Дата: {review['creationDate']}")
+        print(f"Достоинства: {review['pros']}")
+        print(f"Недостатки: {review['cons']}")
+        print(f"Комментарий: {review['text']}")
+        print("-" * 20)
+
+# Пример использования:
+product_link = "https://www.citilink.ru/product/videokarta-palit-nvidia-geforce-rtx-4060-rtx4060-dual-oc-8gb-dual-gddr-1942195/"
+count_of_reviews = 50  # сколько отзывов хотим
+
+collect_reviews(product_link, total_reviews_needed=count_of_reviews)

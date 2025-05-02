@@ -11,6 +11,13 @@ def extract_product_id(url):
     else:
         raise ValueError("Не удалось извлечь product_id из ссылки.")
 
+def clean_text(text):
+    if text and isinstance(text, str) and text.strip():
+        text = re.sub(r'[\n\r]+', ' ', text)
+        text = re.sub(r'\s+', ' ', text)
+        return text.strip()
+    return "Не указано"
+
 def get_citilink_reviews(product_id, page=1, per_page=5):
     url = 'https://www.citilink.ru/graphql/'
 
@@ -19,7 +26,6 @@ def get_citilink_reviews(product_id, page=1, per_page=5):
         'content-type': 'application/json',
         'origin': 'https://www.citilink.ru',
         'referer': f'https://www.citilink.ru/product/{product_id}/otzyvy/?page={page}',
-        # 'user-agent': 'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/132.0.0.0 Mobile Safari/537.36',
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36',
     }
 
@@ -28,10 +34,10 @@ def get_citilink_reviews(product_id, page=1, per_page=5):
         product_b6304_0d594:product(filter:$filter1){
             opinions_03450_3ec12:opinions(input:$input2){
                 payload{
-                    items{
+                    items{ 
                         pros 
                         cons 
-                        text 
+                        text  
                     }
                 }
                 pageInfo{
@@ -105,7 +111,13 @@ def collect_reviews(product_url, total_reviews_needed, per_page=5):
                 print("Больше отзывов нет.")
                 break
 
-            collected_reviews.extend(items)
+            for item in items:
+                cleaned_review = {
+                    "Достоинства": clean_text(item.get("pros", "")),
+                    "Недостатки": clean_text(item.get("cons", "")),
+                    "Комментарий": clean_text(item.get("text", ""))
+                }
+                collected_reviews.append(cleaned_review)
 
             if not data['data']['product_b6304_0d594']['opinions_03450_3ec12']['pageInfo']['hasNextPage']:
                 print("Достигнут конец отзывов на сайте.")
@@ -115,7 +127,7 @@ def collect_reviews(product_url, total_reviews_needed, per_page=5):
         else:
             print("Ошибка при получении данных.")
             break
-
+    
     filename = f'citilink_reviews_{product_id}_{len(collected_reviews)}.json'
     with open(filename, 'w', encoding='utf-8') as json_file:
         json.dump(collected_reviews, json_file, ensure_ascii=False, indent=4)
@@ -124,8 +136,8 @@ def collect_reviews(product_url, total_reviews_needed, per_page=5):
     print(f"Отзывы сохранены в файл: {filename}")
     print(f"Парсинг отзывов выполнился за {round(end_time - start_time, 2)} секунд.")
 
-# ---- Ввод данных пользователем ----
 
+# ---- Ввод данных пользователем ----
 product_link = input("Введите ссылку на товар Citilink: ").strip()
 try:
     count_of_reviews = int(input("Сколько отзывов собрать?: ").strip())

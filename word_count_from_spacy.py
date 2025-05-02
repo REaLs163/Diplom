@@ -25,16 +25,32 @@ def preprocess_text(text):
     ]  # Лемматизация + фильтр по частям речи
     
     return tokens
+# Вызов анализа
+def analyze_reviews(json_path: str, top_n: int = 10) -> list[tuple[str, int]]:
+    try:
+        with open("citilink_reviews_1472659_125.json", "r", encoding="utf-8") as file:
+            reviews_data = json.load(file)
+    except FileNotFoundError:
+        raise FileNotFoundError(f"Файл {json_path} не найден.")
+    except json.JSONDecodeError:
+        raise ValueError(f"Файл {json_path} не является корректным JSON.")        
 
-with open("comments.json", "r", encoding="utf-8") as file:
-    reviews_data = json.load(file)
-
-# Объединяем все отзывы в один список
-reviews = [f"{r['Достоинства']} {r['Недостатки']} {r['Комментарий']}" for r in reviews_data]
-
-# Подсчет частотности слов
-word_freqs = Counter()
-for review in reviews:
-    word_freqs.update(preprocess_text(review))
-
-print(word_freqs.most_common(10))
+    # # Объединяем все отзывы в один список
+    # reviews = [f"{r['Достоинства']} {r['Недостатки']} {r['Комментарий']}" for r in reviews_data]
+    reviews = [
+        f"{r.get('Достоинства', '')} {r.get('Недостатки', '')} {r.get('Комментарий', '')}"
+        for r in reviews_data
+    ]
+    # Подсчет частотности слов
+    word_freqs = Counter()
+    for review in reviews:
+        word_freqs.update(preprocess_text(review))
+    return word_freqs.most_common(top_n)
+    # print(word_freqs.most_common(top_n))
+    
+    
+# Пример использования
+if __name__ == "__main__":
+    top_words = analyze_reviews("citilink_reviews_1472659_125.json", top_n=10)
+    for word, count in top_words:
+        print(f"{word}: {count}")

@@ -1,0 +1,750 @@
+{
+    "data": {
+        "product_b6304_fbc30": {
+            "opinions_03450_dce30": {
+                "payload": {
+                    "summary": {
+                        "rating": 4.8,
+                        "ratingCounters": [
+                            {
+                                "__typename": "UGC_OpinionRating",
+                                "count": 26,
+                                "percentage": 87,
+                                "rating": 5
+                            },
+                            {
+                                "__typename": "UGC_OpinionRating",
+                                "count": 3,
+                                "percentage": 10,
+                                "rating": 4
+                            },
+                            {
+                                "__typename": "UGC_OpinionRating",
+                                "count": 1,
+                                "percentage": 3,
+                                "rating": 3
+                            },
+                            {
+                                "__typename": "UGC_OpinionRating",
+                                "count": 0,
+                                "percentage": 0,
+                                "rating": 2
+                            },
+                            {
+                                "__typename": "UGC_OpinionRating",
+                                "count": 0,
+                                "percentage": 0,
+                                "rating": 1
+                            }
+                        ],
+                        "bestOpinion": {
+                            "id": 1903325,
+                            "creationDate": "2024-04-30T01:31:00.000Z",
+                            "pros": "Новая.\nРаботает. Сразу, без танцев с бубном.",
+                            "cons": "Пока не выявил.",
+                            "text": "Брал на замену 1660 Super, так что даж дрова качать не пришлось, просто воткнул, включил, работает.\nПопалалась на hynix, но думаю особо  без разницы.\nТолком за вечер погонять не успел, да и нечем нагрузить толком. Ну только вот где 1660 пыхтела, \nгрелась но тащила, эта бесшумно светится и и радует слух и глаз.\nБудем дальше смотреть.",
+                            "rating": 5,
+                            "isBest": false,
+                            "author": {
+                                "id": "",
+                                "b2c": {
+                                    "__typename": "B2C_PublicUserB2C",
+                                    "id": "75756DEA-E4B3-43BE-89A0-1347130498E0",
+                                    "userInfo": {
+                                        "nickname": "",
+                                        "firstName": "Максим",
+                                        "avatar": {
+                                            "sources": [
+                                                {
+                                                    "__typename": "ImageSource",
+                                                    "url": "https://cdn.citilink.ru/VEUo2xK2wYQLKvRrkp-noPXqf032f11yfy_YTXQ0DN4/resizing_type:auto/gravity:sm/plain/avatar/noavatar.jpg",
+                                                    "size": "XS"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "expert": {
+                                        "isExpert": false
+                                    }
+                                },
+                                "counters": {
+                                    "__typename": "B2C_UserActivityCounters",
+                                    "review": 0,
+                                    "opinion": 4,
+                                    "question": 0
+                                },
+                                "vendor": null
+                            },
+                            "status": "PUBLISHED",
+                            "vendor": "CITILINK",
+                            "voteInfo": {
+                                "info": {
+                                    "type": "NO_VOTE",
+                                    "counters": {
+                                        "likes": 11,
+                                        "dislikes": 1
+                                    },
+                                    "isVoted": false
+                                },
+                                "target": {
+                                    "id": "2"
+                                }
+                            },
+                            "authorNickname": "Максим",
+                            "abuse": {
+                                "reasons": [
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "1",
+                                        "name": "Ненормативная лексика",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "2",
+                                        "name": "Оскорбление пользователей и администрации сайта",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "3",
+                                        "name": "Рассылка рекламной информации (спам)",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "4",
+                                        "name": "Коммерческая деятельность",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "5",
+                                        "name": "Нарушение правил",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "0",
+                                        "name": "Другое",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": true,
+                                        "withMessage": true
+                                    }
+                                ],
+                                "target": "OPINION"
+                            },
+                            "product": {
+                                "shortName": "Видеокарта Palit NVIDIA  GeForce RTX 4060 RTX4060 DUAL OC"
+                            }
+                        }
+                    },
+                    "items": [
+                        {
+                            "__typename": "UGC_Opinion",
+                            "id": 1903325,
+                            "creationDate": "2024-04-30T01:31:00.000Z",
+                            "pros": "Новая.\nРаботает. Сразу, без танцев с бубном.",
+                            "cons": "Пока не выявил.",
+                            "text": "Брал на замену 1660 Super, так что даж дрова качать не пришлось, просто воткнул, включил, работает.\nПопалалась на hynix, но думаю особо  без разницы.\nТолком за вечер погонять не успел, да и нечем нагрузить толком. Ну только вот где 1660 пыхтела, \nгрелась но тащила, эта бесшумно светится и и радует слух и глаз.\nБудем дальше смотреть.",
+                            "rating": 5,
+                            "isBest": true,
+                            "author": {
+                                "id": "",
+                                "b2c": {
+                                    "__typename": "B2C_PublicUserB2C",
+                                    "id": "75756DEA-E4B3-43BE-89A0-1347130498E0",
+                                    "userInfo": {
+                                        "nickname": "",
+                                        "firstName": "Максим",
+                                        "avatar": {
+                                            "sources": [
+                                                {
+                                                    "__typename": "ImageSource",
+                                                    "url": "https://cdn.citilink.ru/VEUo2xK2wYQLKvRrkp-noPXqf032f11yfy_YTXQ0DN4/resizing_type:auto/gravity:sm/plain/avatar/noavatar.jpg",
+                                                    "size": "XS"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "expert": {
+                                        "isExpert": false
+                                    }
+                                },
+                                "counters": {
+                                    "__typename": "B2C_UserActivityCounters",
+                                    "review": 0,
+                                    "opinion": 4,
+                                    "question": 0
+                                },
+                                "vendor": null
+                            },
+                            "status": "PUBLISHED",
+                            "vendor": "CITILINK",
+                            "voteInfo": {
+                                "info": {
+                                    "type": "NO_VOTE",
+                                    "counters": {
+                                        "likes": 11,
+                                        "dislikes": 1
+                                    },
+                                    "isVoted": false
+                                },
+                                "target": {
+                                    "id": "2"
+                                }
+                            },
+                            "authorNickname": "Максим",
+                            "abuse": {
+                                "reasons": [
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "1",
+                                        "name": "Ненормативная лексика",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "2",
+                                        "name": "Оскорбление пользователей и администрации сайта",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "3",
+                                        "name": "Рассылка рекламной информации (спам)",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "4",
+                                        "name": "Коммерческая деятельность",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "5",
+                                        "name": "Нарушение правил",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "0",
+                                        "name": "Другое",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": true,
+                                        "withMessage": true
+                                    }
+                                ],
+                                "target": "OPINION"
+                            },
+                            "product": {
+                                "shortName": "Видеокарта Palit NVIDIA  GeForce RTX 4060 RTX4060 DUAL OC"
+                            }
+                        },
+                        {
+                            "__typename": "UGC_Opinion",
+                            "id": 1718225,
+                            "creationDate": "2023-08-20T07:56:00.000Z",
+                            "pros": "Дешевый варик.\n3060 обходит на 12-14% + при одинаковой +- стоимости.\nDlss3",
+                            "cons": "Разъем не всем подойдет.",
+                            "text": "Заказал ее на новую сборку. На старом компе 2060 12гб. Разница, как минимум 30 - 50кадров. Разъем норм, не пугайтесь.  У меня мать под pci 4.0. Поэтому ничего не отваливается. Если брать ее для новой сборки, рекомендую. Дешевый варик достаточно. 3060 обходит на 12-14% +",
+                            "rating": 5,
+                            "isBest": false,
+                            "author": {
+                                "id": "",
+                                "b2c": {
+                                    "__typename": "B2C_PublicUserB2C",
+                                    "id": "8509215F-D6B3-49FA-ADF3-DF24A628A3CB",
+                                    "userInfo": {
+                                        "nickname": "",
+                                        "firstName": "Вадим",
+                                        "avatar": {
+                                            "sources": [
+                                                {
+                                                    "__typename": "ImageSource",
+                                                    "url": "https://cdn.citilink.ru/VEUo2xK2wYQLKvRrkp-noPXqf032f11yfy_YTXQ0DN4/resizing_type:auto/gravity:sm/plain/avatar/noavatar.jpg",
+                                                    "size": "XS"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "expert": {
+                                        "isExpert": false
+                                    }
+                                },
+                                "counters": {
+                                    "__typename": "B2C_UserActivityCountersNotFoundError",
+                                    "message": "Счётчики активностей не найдены"
+                                },
+                                "vendor": null
+                            },
+                            "status": "PUBLISHED",
+                            "vendor": "UNKNOWN",
+                            "voteInfo": {
+                                "info": {
+                                    "type": "NO_VOTE",
+                                    "counters": {
+                                        "likes": 15,
+                                        "dislikes": 6
+                                    },
+                                    "isVoted": false
+                                },
+                                "target": {
+                                    "id": "2"
+                                }
+                            },
+                            "authorNickname": "Вадим",
+                            "abuse": {
+                                "reasons": [
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "1",
+                                        "name": "Ненормативная лексика",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "2",
+                                        "name": "Оскорбление пользователей и администрации сайта",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "3",
+                                        "name": "Рассылка рекламной информации (спам)",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "4",
+                                        "name": "Коммерческая деятельность",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "5",
+                                        "name": "Нарушение правил",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "0",
+                                        "name": "Другое",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": true,
+                                        "withMessage": true
+                                    }
+                                ],
+                                "target": "OPINION"
+                            },
+                            "product": {
+                                "shortName": "Видеокарта Palit NVIDIA  GeForce RTX 4060 RTX4060 DUAL OC"
+                            }
+                        },
+                        {
+                            "__typename": "UGC_Opinion",
+                            "id": 1762574,
+                            "creationDate": "2023-11-09T11:58:00.000Z",
+                            "pros": "Купил, поставил, работает.\nВроде не шумит, не греется",
+                            "cons": "Говорят, память hynix это недостаток, так вот у меня попалась эта память",
+                            "text": "Интересный момент: у меня совпадает название и партномер как на странице магазина, но размер штекера, который вставляется в разъем PCI - стандартный, полноразмерный, а не урезанный, как на фото товара. Я против этого не возражаю, но интересно, что бы это значило?",
+                            "rating": 5,
+                            "isBest": false,
+                            "author": {
+                                "id": "",
+                                "b2c": {
+                                    "__typename": "B2C_PublicUserB2C",
+                                    "id": "F7860FC6-AB79-4B7A-B9F1-AAC2DAD85DB9",
+                                    "userInfo": {
+                                        "nickname": "",
+                                        "firstName": "Павел",
+                                        "avatar": {
+                                            "sources": [
+                                                {
+                                                    "__typename": "ImageSource",
+                                                    "url": "https://cdn.citilink.ru/VEUo2xK2wYQLKvRrkp-noPXqf032f11yfy_YTXQ0DN4/resizing_type:auto/gravity:sm/plain/avatar/noavatar.jpg",
+                                                    "size": "XS"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "expert": {
+                                        "isExpert": false
+                                    }
+                                },
+                                "counters": {
+                                    "__typename": "B2C_UserActivityCountersNotFoundError",
+                                    "message": "Счётчики активностей не найдены"
+                                },
+                                "vendor": null
+                            },
+                            "status": "PUBLISHED",
+                            "vendor": "CITILINK",
+                            "voteInfo": {
+                                "info": {
+                                    "type": "NO_VOTE",
+                                    "counters": {
+                                        "likes": 3,
+                                        "dislikes": 2
+                                    },
+                                    "isVoted": false
+                                },
+                                "target": {
+                                    "id": "2"
+                                }
+                            },
+                            "authorNickname": "Павел",
+                            "abuse": {
+                                "reasons": [
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "1",
+                                        "name": "Ненормативная лексика",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "2",
+                                        "name": "Оскорбление пользователей и администрации сайта",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "3",
+                                        "name": "Рассылка рекламной информации (спам)",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "4",
+                                        "name": "Коммерческая деятельность",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "5",
+                                        "name": "Нарушение правил",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "0",
+                                        "name": "Другое",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": true,
+                                        "withMessage": true
+                                    }
+                                ],
+                                "target": "OPINION"
+                            },
+                            "product": {
+                                "shortName": "Видеокарта Palit NVIDIA  GeForce RTX 4060 RTX4060 DUAL OC"
+                            }
+                        },
+                        {
+                            "__typename": "UGC_Opinion",
+                            "id": 2373120,
+                            "creationDate": "2024-11-30T01:04:00.000Z",
+                            "pros": "Хорошая современная видюха",
+                            "cons": "Не нашел",
+                            "text": "Всегда мечтал о видеокарте nvidia долго выбирал но остановился на этом варианте и не жалею все современные игры на моей сборке с ней идут стабильно в 120-150 ФПС на максимальных настройках графики",
+                            "rating": 5,
+                            "isBest": false,
+                            "author": {
+                                "id": "",
+                                "b2c": {
+                                    "__typename": "B2C_PublicUserB2C",
+                                    "id": "263B6EEF-1BFA-4187-B37D-09F607CE1E8B",
+                                    "userInfo": {
+                                        "nickname": "",
+                                        "firstName": "Алексей",
+                                        "avatar": {
+                                            "sources": [
+                                                {
+                                                    "__typename": "ImageSource",
+                                                    "url": "https://cdn.citilink.ru/VEUo2xK2wYQLKvRrkp-noPXqf032f11yfy_YTXQ0DN4/resizing_type:auto/gravity:sm/plain/avatar/noavatar.jpg",
+                                                    "size": "XS"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "expert": {
+                                        "isExpert": false
+                                    }
+                                },
+                                "counters": {
+                                    "__typename": "B2C_UserActivityCountersNotFoundError",
+                                    "message": "Счётчики активностей не найдены"
+                                },
+                                "vendor": null
+                            },
+                            "status": "PUBLISHED",
+                            "vendor": "CITILINK",
+                            "voteInfo": {
+                                "info": {
+                                    "type": "NO_VOTE",
+                                    "counters": {
+                                        "likes": 0,
+                                        "dislikes": 0
+                                    },
+                                    "isVoted": false
+                                },
+                                "target": {
+                                    "id": "2"
+                                }
+                            },
+                            "authorNickname": "Алексей",
+                            "abuse": {
+                                "reasons": [
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "1",
+                                        "name": "Ненормативная лексика",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "2",
+                                        "name": "Оскорбление пользователей и администрации сайта",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "3",
+                                        "name": "Рассылка рекламной информации (спам)",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "4",
+                                        "name": "Коммерческая деятельность",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "5",
+                                        "name": "Нарушение правил",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "0",
+                                        "name": "Другое",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": true,
+                                        "withMessage": true
+                                    }
+                                ],
+                                "target": "OPINION"
+                            },
+                            "product": {
+                                "shortName": "Видеокарта Palit NVIDIA  GeForce RTX 4060 RTX4060 DUAL OC"
+                            }
+                        },
+                        {
+                            "__typename": "UGC_Opinion",
+                            "id": 1795737,
+                            "creationDate": "2023-12-29T14:46:00.000Z",
+                            "pros": "Тихая, холодная, полноценная, разгон, невысокая цена, RGB подсветка.",
+                            "cons": "Не нашёл.",
+                            "text": "Отличный бюджетный вариант карточки из новой 40-ой серии.",
+                            "rating": 5,
+                            "isBest": false,
+                            "author": {
+                                "id": "",
+                                "b2c": {
+                                    "__typename": "B2C_PublicUserB2C",
+                                    "id": "E53FB4B8-2E10-46E3-B5DC-35893C6A5818",
+                                    "userInfo": {
+                                        "nickname": "",
+                                        "firstName": "Руслан",
+                                        "avatar": {
+                                            "sources": [
+                                                {
+                                                    "__typename": "ImageSource",
+                                                    "url": "https://cdn.citilink.ru/1WQKTR_uCRZKhTByo8pqJlZyO5L_LgDvfjzSzDj7s6U/resizing_type:auto/gravity:sm/plain/avatar/c14f0a80d4e565feb9fdae10a00085ba.jpg",
+                                                    "size": "XS"
+                                                }
+                                            ]
+                                        }
+                                    },
+                                    "expert": {
+                                        "isExpert": true
+                                    }
+                                },
+                                "counters": {
+                                    "__typename": "B2C_UserActivityCounters",
+                                    "review": 0,
+                                    "opinion": 15,
+                                    "question": 65
+                                },
+                                "vendor": null
+                            },
+                            "status": "PUBLISHED",
+                            "vendor": "CITILINK",
+                            "voteInfo": {
+                                "info": {
+                                    "type": "NO_VOTE",
+                                    "counters": {
+                                        "likes": 1,
+                                        "dislikes": 1
+                                    },
+                                    "isVoted": false
+                                },
+                                "target": {
+                                    "id": "2"
+                                }
+                            },
+                            "authorNickname": "Руслан",
+                            "abuse": {
+                                "reasons": [
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "1",
+                                        "name": "Ненормативная лексика",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "2",
+                                        "name": "Оскорбление пользователей и администрации сайта",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "3",
+                                        "name": "Рассылка рекламной информации (спам)",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "4",
+                                        "name": "Коммерческая деятельность",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "5",
+                                        "name": "Нарушение правил",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": false,
+                                        "withMessage": false
+                                    },
+                                    {
+                                        "__typename": "UGC_AbuseReason",
+                                        "id": "0",
+                                        "name": "Другое",
+                                        "targetType": "OPINION",
+                                        "isMessageRequired": true,
+                                        "withMessage": true
+                                    }
+                                ],
+                                "target": "OPINION"
+                            },
+                            "product": {
+                                "shortName": "Видеокарта Palit NVIDIA  GeForce RTX 4060 RTX4060 DUAL OC"
+                            }
+                        }
+                    ],
+                    "sortings": [
+                        {
+                            "__typename": "UGC_OpinionsSortType",
+                            "id": "HELPFUL",
+                            "name": "сначала полезные",
+                            "sort": "HELPFUL",
+                            "isSelected": true
+                        },
+                        {
+                            "__typename": "UGC_OpinionsSortType",
+                            "id": "NEW",
+                            "name": "новые",
+                            "sort": "NEW",
+                            "isSelected": false
+                        },
+                        {
+                            "__typename": "UGC_OpinionsSortType",
+                            "id": "BEST",
+                            "name": "лучшие оценки",
+                            "sort": "BEST",
+                            "isSelected": false
+                        },
+                        {
+                            "__typename": "UGC_OpinionsSortType",
+                            "id": "WORST",
+                            "name": "худшие оценки",
+                            "sort": "WORST",
+                            "isSelected": false
+                        }
+                    ]
+                },
+                "pageInfo": {
+                    "page": 1,
+                    "perPage": 5,
+                    "totalItems": 30,
+                    "totalPages": 6,
+                    "hasNextPage": true,
+                    "hasPreviousPage": false
+                }
+            }
+        }
+    }
+}

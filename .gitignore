@@ -1,4 +1,5 @@
 /__pycache__/
+/app/__pycache__/
 /venv/
 /comments.json
 /page.html
@@ -8,3 +9,4 @@
 /data_processing.py
 /token_bot.py
 /data_processing.py
+/data/

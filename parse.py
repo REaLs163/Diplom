@@ -70,7 +70,6 @@ def get_citilink_reviews(product_id, page=1, per_page=5):
     }
 
     response = requests.post(url, headers=headers, json=payload)
-
     if response.status_code == 200:
         return response.json()
     else:
@@ -138,9 +137,9 @@ def collect_reviews(product_url, total_reviews_needed, per_page=5):
 
 
 # ---- Ввод данных пользователем ----
-product_link = input("Введите ссылку на товар Citilink: ").strip()
-try:
-    count_of_reviews = int(input("Сколько отзывов собрать?: ").strip())
-    collect_reviews(product_link, total_reviews_needed=count_of_reviews)
-except ValueError:
-    print("Ошибка: количество отзывов должно быть целым числом.")
+# product_link = input("Введите ссылку на товар Citilink: ").strip()
+# try:
+#     count_of_reviews = int(input("Сколько отзывов собрать?: ").strip())
+#     collect_reviews(product_link, total_reviews_needed=count_of_reviews)
+# except ValueError:
+#     print("Ошибка: количество отзывов должно быть целым числом.")

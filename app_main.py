@@ -1,10 +1,13 @@
 import asyncio
 import logging
 from aiogram import Bot, Dispatcher
+from aiogram.enums.parse_mode import ParseMode
+from aiogram.client.bot import DefaultBotProperties
 from token_bot import TOKEN
-from app.handlers import router
+from app.handlers.hdl import router
 
-bot = Bot(token=TOKEN)
+
+bot = Bot(token=TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 dp = Dispatcher()
    
 async def main():

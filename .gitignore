@@ -10,3 +10,7 @@
 /token_bot.py
 /data_processing.py
 /data/
+/app/handlers/__pycache__/
+/app/keyboards/__pycache__/
+/app/message/__pycache__/
+/app/states/__pycache__/

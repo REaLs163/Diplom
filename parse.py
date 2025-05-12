@@ -84,7 +84,7 @@ def get_total_reviews_count(product_id):
     else:
         raise Exception("Не удалось получить общее количество отзывов.")
 
-def collect_reviews(product_url, total_reviews_needed, per_page=5):
+def collect_reviews(user_id, product_url, total_reviews_needed, per_page=5, save_path=None):
     start_time = t.time()
     product_id = extract_product_id(product_url)
 
@@ -126,20 +126,15 @@ def collect_reviews(product_url, total_reviews_needed, per_page=5):
         else:
             print("Ошибка при получении данных.")
             break
-    
-    filename = f'citilink_reviews_{product_id}_{len(collected_reviews)}.json'
-    with open(filename, 'w', encoding='utf-8') as json_file:
+        
+    if save_path is None:
+        save_path = f"citilink_reviews_{user_id}_{product_id}_{len(collected_reviews)}.json"    
+        
+    with open(save_path, 'w', encoding='utf-8') as json_file:
         json.dump(collected_reviews, json_file, ensure_ascii=False, indent=4)
 
     end_time = t.time()
-    print(f"Отзывы сохранены в файл: {filename}")
-    print(f"Парсинг отзывов выполнился за {round(end_time - start_time, 2)} секунд.")
+    print(f"Отзывы сохранены в файл: {save_path}")
+    print(f"Парсинг выполнен за {round(end_time - start_time, 2)} секунд.")
 
-
-# ---- Ввод данных пользователем ----
-# product_link = input("Введите ссылку на товар Citilink: ").strip()
-# try:
-#     count_of_reviews = int(input("Сколько отзывов собрать?: ").strip())
-#     collect_reviews(product_link, total_reviews_needed=count_of_reviews)
-# except ValueError:
-#     print("Ошибка: количество отзывов должно быть целым числом.")
+    return save_path

@@ -26,9 +26,9 @@ pip install -r requirements.txt
 python -m spacy download ru_core_news_sm
 ```
 
-4. Создай файл `token_bot.py`:
-```python
-TOKEN = "your_telegram_bot_token"
+4. Создайте необходимые переменные окружения:
+```env
+TOKEN=your_telegram_bot_token
 ```
 
 5. Запусти бота:

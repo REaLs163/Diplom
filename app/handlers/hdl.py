@@ -2,6 +2,7 @@ import os
 import shutil
 from aiogram import Router, F
 from aiogram.utils.markdown import hbold
+from aiogram.fsm.context import FSMContext
 from aiogram.filters import CommandStart, Command
 from aiogram.types import Message, ReplyKeyboardRemove
 import app.message.msg
@@ -14,7 +15,12 @@ from word_count_from_spacy import analyze_reviews
 router = Router()
 
 @router.message(CommandStart())
-async def start(message: Message):
+async def start(message: Message, state: FSMContext):
+    data = await state.get_data()
+    if data.get("session_active"):
+        await message.answer(app.message.msg.start_act)
+        return
+    await state.clear()
     await message.answer(app.message.msg.start, reply_markup=kb.main_kb)
 
 @router.message(Command('help'))
@@ -23,7 +29,7 @@ async def help(message: Message):
 
 @router.message(Command('done'))
 @router.message(F.text == "Закончить работу")
-async def done(message: Message, state: st.ReviewState):
+async def done(message: Message, state: FSMContext):
     user_id = str(message.from_user.id)
     user_folder = f"data/{user_id}"
     if os.path.exists(user_folder):
@@ -32,12 +38,13 @@ async def done(message: Message, state: st.ReviewState):
     await message.answer(app.message.msg.done, reply_markup=ReplyKeyboardRemove())
     
 @router.message(F.text == "Анализ и обработка отзывов")
-async def start_review_process(message: Message, state: st.ReviewState):
+async def start_review_process(message: Message, state: FSMContext):
+    await state.update_data(session_active=True)
     await state.set_state(st.ReviewState.waiting_for_url)
-    await message.answer(app.message.msg.anliz)
+    await message.answer(app.message.msg.anliz, reply_markup=kb.analiz_kb)
     
 @router.message(st.ReviewState.waiting_for_url)
-async def process_url(message: Message, state: st.ReviewState):
+async def process_url(message: Message, state: FSMContext):
     url = message.text.strip()
     try:
         product_id = extract_product_id(url)
@@ -48,7 +55,7 @@ async def process_url(message: Message, state: st.ReviewState):
         await message.answer(app.message.msg.proc_url_warning)
         
 @router.message(st.ReviewState.waiting_for_count)
-async def process_count(message: Message, state: st.ReviewState):
+async def process_count(message: Message, state: FSMContext):
     try:
         count = int(message.text.strip())
         if count <= 0:
@@ -73,7 +80,8 @@ async def process_count(message: Message, state: st.ReviewState):
 
         if total_available == 0:
             await message.answer(app.message.msg.get_trc)
-            await state.clear()
+            await state.set_state(st.ReviewState.waiting_for_url)
+            await message.answer(app.message.msg.get_trc2)
             return
 
         if count > total_available:
@@ -89,7 +97,8 @@ async def process_count(message: Message, state: st.ReviewState):
         top_words = analyze_reviews(user_json_path)
         if not top_words:
             await message.answer(app.message.msg.analize_rev)
-            await state.clear()
+            await state.set_state(st.ReviewState.waiting_for_url)
+            await message.answer(app.message.msg.analize_rev2)
             return
 
         result_text = "\n".join([f"{hbold(word)}: {cnt}" for word, cnt in top_words])
@@ -98,4 +107,4 @@ async def process_count(message: Message, state: st.ReviewState):
     except Exception as e:
         await message.answer(f"❌ Произошла ошибка: {e}")
     finally:
-        await state.clear()
+        await state.set_state(st.ReviewState.waiting_for_url)

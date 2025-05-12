@@ -41,6 +41,7 @@ Pygments==2.19.1
 pymorphy3==2.0.3
 pymorphy3-dicts-ru==2.4.417150.4580142
 PySocks==1.7.1
+python-dotenv==1.1.0
 requests==2.32.3
 rich==14.0.0
 ru_core_news_sm @ https://github.com/explosion/spacy-models/releases/download/ru_core_news_sm-3.8.0/ru_core_news_sm-3.8.0-py3-none-any.whl#sha256=69978d47b43e2c4f329bebdb155e8e9d3861bba1a58ba25551419dae7d7e07fc

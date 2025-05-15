@@ -26,7 +26,7 @@ def get_citilink_reviews(product_id, page=1, per_page=5):
         'content-type': 'application/json',
         'origin': 'https://www.citilink.ru',
         'referer': f'https://www.citilink.ru/product/{product_id}/otzyvy/?page={page}',
-        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/135.0.0.0 Safari/537.36',
+        'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36',
     }
 
     query = """

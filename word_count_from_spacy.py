@@ -12,7 +12,7 @@ def handle_negation(text):
 
 # Функция предобработки текста
 def preprocess_text(text):
-    text = text.lower()  # Приводим к нижнему регистру
+    text = text.lower()  
     text = handle_negation(text)  # Обрабатываем отрицания
     text = re.sub(r"[^а-яА-ЯёЁ]", " ", text)  # Убираем знаки препинания
 
@@ -24,7 +24,7 @@ def preprocess_text(text):
            (token.pos_ == "ADJ" or (token.pos_ == "VERB" and "Aspect=Imp" in token.morph))
     ]  # Лемматизация + фильтр по частям речи 
     return tokens
-# Вызов анализа
+# Функция анализа отзывов
 def analyze_reviews(json_path: str, top_n: int = 10) -> list[tuple[str, int]]:
     try:
         with open(json_path, "r", encoding="utf-8") as file:

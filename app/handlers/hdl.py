@@ -12,8 +12,10 @@ import app.keyboards.kbs as kb
 from parse import collect_reviews, extract_product_id, get_total_reviews_count
 from word_count_from_spacy import analyze_reviews
 
+# Определяем маршрутизатор
 router = Router()
 
+# Обработчик старта
 @router.message(CommandStart())
 async def start(message: Message, state: FSMContext):
     data = await state.get_data()
@@ -23,10 +25,12 @@ async def start(message: Message, state: FSMContext):
     await state.clear()
     await message.answer(app.message.msg.start, reply_markup=kb.main_kb)
 
+# Обработчик help
 @router.message(Command('help'))
 async def help(message: Message):
     await message.answer(app.message.msg.help)
 
+# Обработчик окончания работы (очищает данные пользователя и удаляет папку с данными)
 @router.message(Command('done'))
 @router.message(F.text == "Закончить работу")
 async def done(message: Message, state: FSMContext):
@@ -36,13 +40,15 @@ async def done(message: Message, state: FSMContext):
         shutil.rmtree(user_folder)
     await state.clear()
     await message.answer(app.message.msg.done, reply_markup=ReplyKeyboardRemove())
-    
+
+# Обработчик анализа
 @router.message(F.text == "Анализ и обработка отзывов")
 async def start_review_process(message: Message, state: FSMContext):
     await state.update_data(session_active=True)
     await state.set_state(st.ReviewState.waiting_for_url)
     await message.answer(app.message.msg.anliz, reply_markup=kb.analiz_kb)
-    
+
+# Обработчик для URL 
 @router.message(st.ReviewState.waiting_for_url)
 async def process_url(message: Message, state: FSMContext):
     url = message.text.strip()
@@ -53,7 +59,8 @@ async def process_url(message: Message, state: FSMContext):
         await message.answer(app.message.msg.proc_url)
     except ValueError:
         await message.answer(app.message.msg.proc_url_warning)
-        
+
+# Обработчик для количества отзывов 
 @router.message(st.ReviewState.waiting_for_count)
 async def process_count(message: Message, state: FSMContext):
     try:
@@ -98,7 +105,7 @@ async def process_count(message: Message, state: FSMContext):
         if not top_words:
             await message.answer(app.message.msg.analize_rev)
             await state.set_state(st.ReviewState.waiting_for_url)
-            await message.answer(app.message.msg.analize_rev2)
+            await message.answer(app.message.msg.get_trc2)
             return
 
         result_text = "\n".join([f"{hbold(word)}: {cnt}" for word, cnt in top_words])

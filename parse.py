@@ -3,7 +3,7 @@ import json
 import re
 import time as t
 
-
+# Извлечение product_id
 def extract_product_id(url):
     match = re.search(r'/product/.+-(\d+)/', url)
     if match:
@@ -11,6 +11,7 @@ def extract_product_id(url):
     else:
         raise ValueError("Не удалось извлечь product_id из ссылки.")
 
+# Очистка отзывов от лишних пробелов и переносов строки и кареток
 def clean_text(text):
     if text and isinstance(text, str) and text.strip():
         text = re.sub(r'[\n\r]+', ' ', text)
@@ -18,9 +19,10 @@ def clean_text(text):
         return text.strip()
     return "Не указано"
 
+# Создание POST-запроса к GraphQL API для получения JSON-объекта с отзывами и пагинацией
 def get_citilink_reviews(product_id, page=1, per_page=5):
     url = 'https://www.citilink.ru/graphql/'
-
+    # Формируем заголовки
     headers = {
         'accept': '*/*',
         'content-type': 'application/json',
@@ -28,7 +30,7 @@ def get_citilink_reviews(product_id, page=1, per_page=5):
         'referer': f'https://www.citilink.ru/product/{product_id}/otzyvy/?page={page}',
         'user-agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/136.0.0.0 Safari/537.36',
     }
-
+    # Формируем запрос
     query = """
     query($filter1:Catalog_ProductFilterInput!$input2:UGC_OpinionsInput!){
         product_b6304_0d594:product(filter:$filter1){
@@ -52,7 +54,7 @@ def get_citilink_reviews(product_id, page=1, per_page=5):
         }
     }
     """
-
+    # Формируем переменные
     variables = {
         "filter1": {"id": product_id},
         "input2": {
@@ -63,7 +65,7 @@ def get_citilink_reviews(product_id, page=1, per_page=5):
             "withGroup": True
         }
     }
-
+    # Формируем тело запроса
     payload = {
         "query": query,
         "variables": variables
@@ -76,6 +78,7 @@ def get_citilink_reviews(product_id, page=1, per_page=5):
         print(f"Ошибка запроса: {response.status_code}")
         return None
 
+# Запрос на получение общего количества отзывов на товар
 def get_total_reviews_count(product_id):
     data = get_citilink_reviews(product_id, page=1, per_page=1)
     if data:
@@ -84,6 +87,7 @@ def get_total_reviews_count(product_id):
     else:
         raise Exception("Не удалось получить общее количество отзывов.")
 
+# Функция для сбора отзывов о продукте по его url, их отчистки и нормализации
 def collect_reviews(user_id, product_url, total_reviews_needed, per_page=5, save_path=None):
     start_time = t.time()
     product_id = extract_product_id(product_url)
@@ -126,7 +130,8 @@ def collect_reviews(user_id, product_url, total_reviews_needed, per_page=5, save
         else:
             print("Ошибка при получении данных.")
             break
-        
+    
+    # Указываем путь для сохранения JSON
     if save_path is None:
         save_path = f"citilink_reviews_{user_id}_{product_id}_{len(collected_reviews)}.json"    
         

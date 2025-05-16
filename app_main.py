@@ -8,11 +8,14 @@ from aiogram.fsm.storage.memory import MemoryStorage
 from dotenv import load_dotenv
 from app.handlers.hdl import router
 
+# Загружаем переменные окружения
 load_dotenv()
 
+# Инициализируем бота и диспетчер для обработки работы бота
 bot = Bot(os.getenv('TOKEN'), default=DefaultBotProperties(parse_mode=ParseMode.HTML))
 dp = Dispatcher(storage=MemoryStorage())
-   
+
+# Запускаем роутеры для обработки хендлеров и опрос работы бота   
 async def main():
     dp.include_routers(router)
     await dp.start_polling(bot, skip_updates = True)
